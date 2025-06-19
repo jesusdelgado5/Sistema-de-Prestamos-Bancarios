@@ -1,0 +1,30 @@
+def validar_datos(nombre, sexo, salario, monto):
+    if not nombre.strip():
+        raise ValueError("El nombre no puede estar vacío.")
+    if sexo.lower() not in ['masculino', 'femenino']:
+        raise ValueError("Sexo inválido. Use 'Masculino' o 'Femenino'.")
+    if salario <= 0:
+        raise ValueError("El salario debe ser mayor que 0.")
+    if monto < 25000.0 or monto > 400000.0:
+        raise ValueError("El monto debe estar entre B/.25,000.00 y B/.400,000.00.")
+    return True
+
+def registrar_cliente():
+    nombre = input("Ingrese el nombre del cliente: ").strip()
+    sexo = input("Ingrese el sexo (Masculino/Femenino): ").strip()
+    try:
+        salario = float(input("Ingrese el salario mensual: "))
+        monto = float(input("Ingrese el monto del préstamo solicitado: "))
+    except ValueError:
+        raise ValueError("Debe ingresar valores numéricos para salario y monto.")
+
+    validar_datos(nombre, sexo, salario, monto)
+
+    aprobado = salario > 800.0
+    return {
+        "nombre": nombre,
+        "sexo": sexo.lower(),
+        "salario": salario,
+        "monto": monto,
+        "aprobado": aprobado
+    }
