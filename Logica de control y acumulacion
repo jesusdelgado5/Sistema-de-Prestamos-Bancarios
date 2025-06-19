@@ -1,0 +1,22 @@
+Responsable del bucle principal, control de metas y conteo.
+def ejecutar_tramites():
+total_aprobado = 0.0
+clientes_aprobados = []
+clientes_tramitados = 0
+
+print("\n--- Sistema de Registro de Préstamos ---\n")
+
+while total_aprobado < 1_000_000.0:
+try:
+cliente = registrar_cliente()
+clientes_tramitados += 1
+if cliente["aprobado"]:
+clientes_aprobados.append(cliente)
+total_aprobado += cliente["monto"]
+print(f"✅ Préstamo aprobado para {cliente['nombre']}.\n")
+else:
+print(f"❌ Préstamo rechazado: salario insuficiente.\n")
+except Exception as e:
+print(f"⚠️ Error: {e}\n")
+
+return clientes_tramitados, clientes_aprobados
